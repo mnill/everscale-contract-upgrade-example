@@ -1,0 +1,15 @@
+{
+  "name": "evescale-simple-upgrade-example",
+  "version": "1.0.0",
+  "dependencies": {
+    "@tonclient/appkit": "^0.3.0",
+    "@tonclient/core": "^1.27.1",
+    "@tonclient/lib-node": "^1.27.1",
+    "deep-equal": "^2.0.5"
+  },
+  "scripts": {
+    "build": "mkdir -p artifacts && tondev sol compile -o ./artifacts contracts/Root.sol && tondev sol compile -o ./artifacts contracts/Proxy.sol && tondev sol compile -o ./artifacts contracts/ChildrenV1.sol && tondev sol compile -o ./artifacts contracts/ChildrenV2.sol",
+    "wrapjs": "tondev js wrap ./artifacts/Root.abi.json && tondev js wrap ./artifacts/Proxy.abi.json && tondev js wrap ./artifacts/ChildrenV1.abi.json && tondev js wrap ./artifacts/ChildrenV2.abi.json",
+    "test": "npm run build && npm run wrapjs && node test.js"
+  }
+}
